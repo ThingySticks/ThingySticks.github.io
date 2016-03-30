@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="USB Stick based Internet of Things">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<meta charset="UTF-8">  
+	<title>ThingySticks</title>
+
+	<!-- Custom CSS -->
+    <link href="css/round-about.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+ </head>
+ <body>
+
+	<!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">ThingySticks</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="DesignGuide">Design Guide</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/ThingySticks" target="_blank" alt="ThingySticks GitHub Repositories">GitHub</a>
+                    </li>
+					<li>
+                        <a href="https://Tinamous.com" target="_blank" alt="Tinamous.com IoT Platform">Tinamous.com</a>
+                    </li>
+				</ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Things On Sticks -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Pinout Matrix</h2>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ThingyStick</th>
+						<th>Version</th>
+
+						<th>D7</th>
+						<th>D6</th>
+						<th>D5</th>
+						<th>D4</th>
+						<th>D3</th>
+						<th>D2</th>
+						<th>D1</th>
+						<th>D0</th>
+
+						<th>TX</th>
+						<th>RX</th>
+
+						<th>WKP/A7</th>
+						<th>DAC/A6</th>
+						<th>A5</th>
+						<th>A4</th>
+						<th>A3</th>
+						<th>A2</th>
+						<th>A1</th>
+						<th>A0</th>
+
+						<th>I2C</th>
+					</tr>
+				</thead>
+
+				<tbody data-bind="foreach: sticks" >
+						<tr>
+							<td data-bind="text:name"></th>
+							<td data-bind="text:version"></th>
+							<td data-bind="text:D7"></th>
+							<td data-bind="text:D6">D6</th>
+							<td data-bind="text:D5">D5</th>
+							<td data-bind="text:D4">D4</th>
+							<td data-bind="text:D3">D3</th>
+							<td data-bind="text:D2">D2</th>
+							<td data-bind="text:D1">D1</th>
+							<td data-bind="text:D0">D0</th>
+
+							<td data-bind="text:TX">TX</th>
+							<td data-bind="text:RX">RX</th>
+
+							<td data-bind="text:WKP">WKP/A7</th>
+							<td data-bind="text:DAC">DAC/A6</th>
+							<td data-bind="text:A5">A5</th>
+							<td data-bind="text:A4">A4</th>
+							<td data-bind="text:A3">A3</th>
+							<td data-bind="text:A2">A2</th>
+							<td data-bind="text:A1">A1</th>
+							<td data-bind="text:A0">A0</th>
+
+							<td data-bind="text:I2CAddress">I2C</th>
+						</tr>
+
+
+				</tbody>
+				<!--
+				<tfoot>
+					<tr>
+					<td>Notes:</td>
+					</tr>
+
+					<tr>
+						<td>Core:</td>
+					</tr>
+
+					<tr>
+						<td>Photon:</td>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th>PWM (A4)</th>
+						<th>PWM (A5)</th>
+						<th>PWM</th>
+						<th>PWM</th>
+					</tr>
+
+					<tr>
+						<td>Electron:</td>
+					</tr>
+				</tfoot>
+				-->
+				</table>
+			</div>
+        </div>
+		<!-- row -->
+
+		<hr />
+
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; ThingySticks.com 2016. An <a href="http://www.AnalysisUK.com">Analysis UK Ltd</a> site. ThingyStick, ThingySticks and Thing On A Stick are trademarks of Analysis UK Ltd.</p>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+		</footer>
+
+    </div>
+    <!-- /.container -->
+
+
+
+    <!-- jQuery -->
+	<!-- https://code.jquery.com/jquery-2.2.2.min.js -->
+    <script src="js/jquery.js"></script>
+
+ 
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+
+	<script>
+
+		var ThingySticks = {};
+
+		ThingySticks.StickViewModel = function() {
+			var self = this;
+
+			self.name = ko.observable("test");
+			self.version = ko.observable("1");
+			self.devices = ko.observableArray(["Photon","Electron"]); // Photon/Electron/...
+
+			// Pinout
+			self.D7 = ko.observable("D7");
+			self.D6 = ko.observable("D6");
+			self.D5 = ko.observable("D5");
+			self.D4 = ko.observable("D4");
+			self.D3 = ko.observable("D3");
+			self.D2 = ko.observable("D2");
+			self.D1 = ko.observable("D1");
+			self.D0 = ko.observable("D0");
+
+			self.TX = ko.observable("TX");
+			self.RX = ko.observable("RX");
+
+			self.WKP = ko.observable("WKP/A7");
+			self.DAC = ko.observable("DAC/A6");
+
+			self.A5 = ko.observable("A5");
+			self.A4 = ko.observable("A4");
+			self.A3 = ko.observable("A3");
+			self.A2 = ko.observable("A2");
+			self.A1 = ko.observable("A1");
+			self.A0 = ko.observable("A0");
+			self.I2CAddress= ko.observable("A0");
+
+			self.gitHubRepository = ko.observable("");
+			self.projectUrl = ko.observable("");
+
+			self.load = function(json) {
+				self.name(json.name);
+				self.devices(json.devices);
+				self.version(json.version);
+				self.D7(json.D7);
+				self.D6(json.D6);
+				self.D5(json.D5);
+				self.D4(json.D4);
+				self.D3(json.D3);
+				self.D2(json.D2);
+				self.D1(json.D1);
+				self.D0(json.D0);
+
+				self.TX(json.TX);
+				self.RX(json.RX);
+
+				self.WKP(json.WKP);
+				self.DAC(json.DAC);
+
+				self.A5(json.A5);
+				self.A4(json.A4);
+				self.A3(json.A3);
+				self.A2(json.A2);
+				self.A1(json.A1);
+				self.A0(json.A0);
+
+				self.I2CAddress(json.I2CAddress);
+				
+				// Base URL GitHub, 
+				// https://github.com/ThingySticks/...
+				// By convention can expect certain folders/files under this. (e.g. /<Device>/<Version>
+				self.gitHubRepository(json.gitHubRepository);
+
+				// http://thingysticks.com/...
+				self.projectUrl(json.projectUrl);
+			}
+
+			return self;
+		}
+
+		function PinoutMatrixViewModel() {
+			var self = this;
+			this.sticks = new ko.observableArray([]);
+
+			self.load = function() {
+				console.log("Loading pinoutmatrix");
+				$.get("http://thingysticks.com/ThingySticks.json", function(result) {
+					console.log("Loaded pinoutmatrix");
+					self.loadJSON(result);				
+				});
+			};
+
+			self.loadJSON = function(json) {
+				var sticks = $.map(json.Sticks, function(pinout) {
+					console.log("got stick");
+					var stickViewModel = new ThingySticks.StickViewModel();
+					stickViewModel.load(pinout);
+					console.log("loaded stick");
+					return stickViewModel;
+				});
+
+				self.sticks(sticks);
+			};
+
+			return self;
+		}
+
+		// Activates knockout.js
+		var viewModel = new PinoutMatrixViewModel();
+		ko.applyBindings(viewModel);
+		viewModel.load();
+
+		// Debug
+		var json = {Sticks:[
+			{name:"Current Monitor",version:"2", devices:[""], D1:"SCL", D0:"SDA", D7:"Yes",I2CAddress:"??", gitHubRepository:"CurrentMonitor", projectUrl:"CurrentMonitor"},
+			{name:"FET",version:"1", devices:["Photon","Electron"], D3:"S.FET", D2:"FET", A4:"FET", gitHubRepository:"FETish", projectUrl:"FETish"},
+			{name:"NeoPixels",version:"1", devices:["Photon"], D2:"Center", D3:"External", gitHubRepository:"NeoPixels", projectUrl:"Neopixels"},
+			{name:"NeoPixels",version:"2", devices:["Photon","Electron"], D2:"Center", D3:"External", gitHubRepository:"NeoPixels", projectUrl:"Neopixels"},
+			{name:"Environment",Version:"2.x", devices:["Photon","Electron"], D1:"SCL", D0:"SDA",A1:"Light",I2CAddress:"??", gitHubRepository:"EnvironmentMonitor", projectUrl:"EnvironmentMonitor"},
+			{name:"Big Latching Relay",Version:"1", devices:["Photon","Electron"], D2:"Relay", D3:"Relay", gitHubRepository:"RelayOnAStick/tree/master/BigLatchingRelay", projectUrl:"Relay/BigLatchingRelay"},
+			{name:"Simple Relay",Version:"1", devices:["Photon"], D7:"Relay", gitHubRepository:"RelayOnAStick/tree/master/SimpleRelay", projectUrl:""},
+			{name:"Paperless Printer",Version:"1", devices:["Photon", "Electron"], D2:"Relay/LED", D3:"Relay/LED", TX:"TX", RX:"RX", A0:"RTS", A1:"CTS", gitHubRepository:"PaperlessPrinter", projectUrl:"PaperlessPrinter"},
+			]}
+		//viewModel.loadJSON(json); 
+
+	
+
+	</script>
+ </body>
+</html>
