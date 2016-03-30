@@ -273,15 +273,22 @@
 			this.sticks = new ko.observableArray([]);
 
 			self.load = function() {
+
 				console.log("Loading pinoutmatrix");
-				$.get("http://thingysticks.com/ThingySticks.json", function(result) {
-					console.log("Loaded pinoutmatrix");
+				$.getJSON("http://thingysticks.com/ThingySticks.json", {}, function(result) {
+					console.log("Loaded pinoutmatrix: " + result);
 					self.loadJSON(result);				
+				})
+				.fail(function(jqXHR, textStatus, errorThrown ) {
+					console.error("Failed to load ThingySticks file");
+					console.error("jqXHR:" + jqXHR);
+					console.error("textStatus: " + textStatus);
+					console.error("errorThrown : " + errorThrown);
 				});
 			};
 
 			self.loadJSON = function(json) {
-				var sticks = $.map(json.Sticks, function(pinout) {
+				var sticks = $.map(json.sticks, function(pinout) {
 					console.log("got stick");
 					var stickViewModel = new ThingySticks.StickViewModel();
 					stickViewModel.load(pinout);
@@ -301,7 +308,7 @@
 		viewModel.load();
 
 		// Debug
-		var json = {Sticks:[
+		var json = {sticks:[
 			{name:"Current Monitor",version:"2", devices:[""], D1:"SCL", D0:"SDA", D7:"Yes",I2CAddress:"??", gitHubRepository:"CurrentMonitor", projectUrl:"CurrentMonitor"},
 			{name:"FET",version:"1", devices:["Photon","Electron"], D3:"S.FET", D2:"FET", A4:"FET", gitHubRepository:"FETish", projectUrl:"FETish"},
 			{name:"NeoPixels",version:"1", devices:["Photon"], D2:"Center", D3:"External", gitHubRepository:"NeoPixels", projectUrl:"Neopixels"},
@@ -309,7 +316,7 @@
 			{name:"Environment",Version:"2.x", devices:["Photon","Electron"], D1:"SCL", D0:"SDA",A1:"Light",I2CAddress:"??", gitHubRepository:"EnvironmentMonitor", projectUrl:"EnvironmentMonitor"},
 			{name:"Big Latching Relay",Version:"1", devices:["Photon","Electron"], D2:"Relay", D3:"Relay", gitHubRepository:"RelayOnAStick/tree/master/BigLatchingRelay", projectUrl:"Relay/BigLatchingRelay"},
 			{name:"Simple Relay",Version:"1", devices:["Photon"], D7:"Relay", gitHubRepository:"RelayOnAStick/tree/master/SimpleRelay", projectUrl:""},
-			{name:"Paperless Printer",Version:"1", devices:["Photon", "Electron"], D2:"Relay/LED", D3:"Relay/LED", TX:"TX", RX:"RX", A0:"RTS", A1:"CTS", gitHubRepository:"PaperlessPrinter", projectUrl:"PaperlessPrinter"},
+			{name:"Paperless Printer",Version:"1", devices:["Photon", "Electron"], D2:"Relay/LED", D3:"Relay/LED", TX:"TX", RX:"RX", A0:"RTS", A1:"CTS", gitHubRepository:"PaperlessPrinter", projectUrl:"PaperlessPrinter"}
 			]}
 		//viewModel.loadJSON(json); 
 
