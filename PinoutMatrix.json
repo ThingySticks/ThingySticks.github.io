@@ -1,0 +1,4 @@
+{[
+{Name:"Test", D7:"LED"},
+{Name:"Test2", D7:"LED", D6:"Beep"},
+]}
