@@ -1,4 +1,4 @@
-{Sticks:[
+Sticks:[
 {name:"Current Monitor",version:"2", devices:[""], D1:"SCL", D0:"SDA", D7:"Yes",I2CAddress:"??", gitHubRepository:"CurrentMonitor", projectUrl:"CurrentMonitor"},
 {name:"FET",version:"1", devices:["Photon","Electron"], D3:"S.FET", D2:"FET", A4:"FET", gitHubRepository:"FETish", projectUrl:"FETish"},
 {name:"NeoPixels",version:"1", devices:["Photon"], D2:"Center", D3:"External", gitHubRepository:"NeoPixels", projectUrl:"Neopixels"},
@@ -7,4 +7,4 @@
 {name:"Big Latching Relay",Version:"1", devices:["Photon","Electron"], D2:"Relay", D3:"Relay", gitHubRepository:"RelayOnAStick/tree/master/BigLatchingRelay", projectUrl:"Relay/BigLatchingRelay"},
 {name:"Simple Relay",Version:"1", devices:["Photon"], D7:"Relay", gitHubRepository:"RelayOnAStick/tree/master/SimpleRelay", projectUrl:""},
 {name:"Paperless Printer",Version:"1", devices:["Photon", "Electron"], D2:"Relay/LED", D3:"Relay/LED", TX:"TX", RX:"RX", A0:"RTS", A1:"CTS", gitHubRepository:"PaperlessPrinter", projectUrl:"PaperlessPrinter"},
-]}
+]
