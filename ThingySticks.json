@@ -6,5 +6,6 @@
 {"name":"Environment","version":"2.x", "devices":["Photon","Electron"], "D1":"SCL", "D0":"SDA","A1":"Light","I2CAddress":"??", "gitHubRepository":"EnvironmentMonitor", "projectUrl":"EnvironmentMonitor"},
 {"name":"Big Latching Relay","version":"1", "devices":["Photon","Electron"], "D2":"Relay", "D3":"Relay", "gitHubRepository":"RelayOnAStick/tree/master/BigLatchingRelay", "projectUrl":"Relay/BigLatchingRelay"},
 {"name":"Simple Relay","version":"1", "devices":["Photon"], "D7":"Relay", "gitHubRepository":"RelayOnAStick/tree/master/SimpleRelay", "projectUrl":""},
-{"name":"Paperless Printer","version":"1", "devices":["Photon", "Electron"], "D2":"Relay/LED", "D3":"Relay/LED", "TX":"TX", "RX":"RX", "A0":"RTS", "A1":"CTS", "gitHubRepository":"PaperlessPrinter", "projectUrl":"PaperlessPrinter"}
+{"name":"Paperless Printer","version":"1", "devices":["Photon", "Electron"], "D2":"Relay/LED", "D3":"Relay/LED", "TX":"TX", "RX":"RX", "A0":"RTS", "A1":"CTS", "gitHubRepository":"PaperlessPrinter", "projectUrl":"PaperlessPrinter"},
+{"name":"Thermocouple","version":"1", "devices":["Photon", "Electron"], "D0":"SDA", "D1":"SCL", "D7":"LED", "DAC":"VIn Monitor", "A5":"MOSI", "A4":"MISO", "A3":"SCK","A2":"SS","A0":"1-Wire", "gitHubRepository":"Thermocouple", "projectUrl":"Thermocouple"}
 ]}
