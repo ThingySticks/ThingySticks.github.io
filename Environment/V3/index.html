@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
+ <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,10 +14,10 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
 	<meta charset="UTF-8">  
-	<title>ThingySticks</title>
+	<title>ThingySticks - Environment (Temperature, Humidity, Light, Pressure and VOCs) Monitoring</title>
 
 	<!-- Custom CSS -->
-    <link href="css/round-about.css" rel="stylesheet">
+    <link href="../../css/round-about.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,9 +26,9 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
  </head>
- <body>
 
-	<!-- Navigation -->
+ <body>
+ <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -58,155 +57,53 @@
         <!-- /.container -->
     </nav>
 
-    <!-- Page Content -->
+	<!-- Page Content -->
     <div class="container">
 
         <!-- Introduction Row -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">ThingySticks
-                    <small>Internet of Things 'Thing' on a Stick</small>
-                </h1>
-                <p>A range of small, simple, stick based Internet of Things things. Open Source Hardware for the <a href="https://Particle.io" target="_blank">Particle</a> <a href="https://www.particle.io/products/hardware/photon-wifi-dev-kit" target="_blank">Photon</a> and <a href="https://www.particle.io/products/hardware/electron-cellular-dev-kit" target="_blank">Electron</a>.</p>
+				<h1 class="page-header">Environment Monitoring</h1>
+                <p>Temperature, Humidity, Light, Pressure and VOCs Monitoring with the <a href="https://Particle.io" target="_blank">Particle</a> <a href="https://www.particle.io/products/hardware/photon-wifi-dev-kit" target="_blank">Photon</a> or <a href="https://www.particle.io/products/hardware/electron-cellular-dev-kit" target="_blank">Electron</a>.</p>
             </div>
         </div>
 
-        <!-- Things On Sticks -->
+        <!-- Images -->
+        <div class="row">
+			<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="">
+
+				<!-- Indicators -->
+				<ol class="carousel-indicators">
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+					<li data-target="#myCarousel" data-slide-to="3"></li>
+				</ol>
+
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner" role="listbox">
+					<div class="item active">
+						<a href="Images/PlaceHolder.jpg">
+							<img class="img-responsive img-center" src="Images/PlaceHolder.jpg" alt="PlaceHolder">
+						</a>	
+					</div>
+				</div>
+
+				<!-- Left and right controls -->
+				<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
+		</div>
+
+		<!-- Get Notified -->
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Things</h2>
-            </div>
-
-			<!-- Row 1 -->
-            <div class="col-lg-6 text-center">
-                <a href="Photon">
-					<img class="img-responsive img-center" src="Photon/Long/Images/PcbOnly.jpg" alt="Photon Prototyping PCBs">
-				</a>		
-                <h3><a href="Photon">Photon</a>
-                    <small>Photon Prototyping Boards</small>
-                </h3>
-                <p>Prototype USB Sticks for the Particle Photon.</p>
-            </div>
-			
-            <div class="col-lg-6 text-center">
-                <a href="Electron">
-					<img class="img-responsive img-center" src="Electron/Long/Images/ElectronMounted2.jpg" alt="Electron on a Stick">
-				</a>
-                <h3> <a href="Electron">Electron</a>
-                    <small>Electron Prototyping Boards</small>
-                </h3>
-                <p>Prototype USB Sticks for the Particle Electron.</p>
-            </div>
-		</div>
-
-		<!-- Row 2 -->
-		<div class="row">
-
-			<div class="col-lg-6 text-center">
-				<a href="Thermocouple">
-					<img class="img-responsive img-center" src="Thermocouple/Images/Connected.jpg" alt="Wi-Fi Thermocouple on a Stick">
-                </a>
-				<h3><a href="Thermocouple">Thermocouple</a>
-                    <small>Hot Hot Hot!</small>
-                </h3>
-				
-                <p>Temperature measurement using a Thermocouple.</p>
-            </div>
-
-		</div>
-
-		<div class="row">
-			<hr>
-		    <div class="col-lg-12">
-                <h2 class="page-header">Coming Soon</h2>
-            </div>
-		</div>
-
-		<!-- Row 2 -->
-		<div class="row">
-			<div class="col-lg-6 text-center">
-				<a href="Relay">
-					<img class="img-responsive img-center" src="Relay/BigLatchingRelay/Images/PartAssembled.jpg" alt="Relay on a Stick">
-                </a>
-				<h3><a href="Relay">Relays</a>
-                    <small>Switches Stuff</small>
-                </h3>
-				
-                <p>Controls things with different voltage or that need high currents.</p>
-            </div>
-
-            <div class="col-lg-6 text-center">
-				<a href="Fets">
-					<img class="img-responsive img-center" src="Fets/QuadNChannel/Images/FullyAssembled.jpg" alt="FETs on a Stick">
-                </a>
-				<h3><a href="Fets">FETs</a>
-                    <small>Switches DC currents.</small>
-                </h3>
-				
-                <p>N and P Channel FET switch to provide low voltage switching, PWM support which is not available with a relay makes them ideal for LED dimming and fan control.</p>
-            </div>
-
-		</div>
-
-		<!-- Row 3 -->
-		<div class="row">
-			<div class="col-lg-6 text-center">
-                <a href="Environment">
-					<img class="img-responsive img-center" src="Environment/V2/Images/PlaceHolder.jpg" alt="Environment monitoring on a Stick">
-				</a>
-                <h3><a href="Environment">Environmental Sensors</a>
-                    <small>Monitor the Environment</small>
-                </h3>
-                <p>Measure temperature, humidity, light and pressure.</p>
-            </div>
-
-			<!--
-            <div class="col-lg-6 text-center">
-				<a href="UsbPowerSwitch">
-					<img class="img-responsive img-center" src="UsbPowerSwitch/Images/UsbPowerSwitch.png" alt="USB Power switch on a Stick">
-				</a>
-                <h3><a href="UsbPowerSwitch">Usb Switch</a>
-                    <small>Switches USB Power</small>
-                </h3>
-                <p>Control the power to USB things.</p>
-            </div>
-			-->
-        </div>
-
-
-		<!-- Row 4 -->
-		<!--
-        <div class="row">
-			<div class="col-lg-6 text-center">
-                <a href="Buzzer">
-					<img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="Buzzer on a Stick">
-				</a>
-                <h3><a href="Buzzer">DC Current Monitor</a>
-                    <small>Monitor DC  Power</small>
-                </h3>
-                <p>Monitor current on a low voltage DC system</p>
-            </div>
-
-
-
-			<div class="col-lg-6 text-center">
-				<a href="Neopixels">
-					<img class="img-responsive img-center" src="Neopixels/images/NeoPixelStick400x200.png" alt="Neopixel stick on a stick">
-				</a>
-                <h3><a href="Neopixels">Neopixels</a>
-                    <small>Neopixel driver</small>
-                </h3>
-                <p>Drive NeoPixel stick, rings or strips</p>
-            </div>
-
-		</div>
-		-->
-
-		<hr/>
-
-		<div class="row">
-		<div class="col-lg-6 col-offset-lg-3 col-sm-12">
-
 		<!-- Begin MailChimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
 <style type="text/css">
@@ -233,10 +130,69 @@
 </div>
 <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
 <!--End mc_embed_signup-->
+           </div>
 		</div>
-		<!-- row -->
+
+		<!-- Features -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Features</h2>
+				<p>
+					<ul>
+						<li>Coming Soon...</li>
+					</ul>
+				</p>
+            </div>
 		</div>
+				<!-- Sample Code -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Sample Code</h2>
+				<pre>
+				<code>
+				</code>
+				</pre>
+			</div>
+		</div>
+
+		<!-- Dimensions -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Dimensions</h2>
+				<p>
+					<ul>
+						<li>Length: ??mm</li>
+						<li>Width: ??mm</li>
+						<li>Hole 1: 3.2mm at ??,??</li>
+						<li>Hole 2: 3.2mm at ??,??</li>
+						<li>Hole 3: 3.2mm at ??,??</li>
+					</ul>
+				<p>
+            </div>
+		</div>
+
+		<!-- References -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">References</h2>
+				<p>
+					<ul>
+						<li><a href="https://github.com/ThingySticks/WidePhoton">Design files.</a>
+						<li><a href="https://github.com/sparkfun/SparkFun-Eagle-Libraries">SparkFun's excellent Eagle libraries</a></li>
+						<li><a href="https://github.com/spark/electron/tree/master/libraries">Particle.io Eagle library</a></li>
+						<li><a href="https://github.com/spark/photon">Particle.io Photon Reference</a></li>
+						<li><a href="https://docs.particle.io/guide/getting-started/intro/photon/">Particles Electron Getting Started Guide</a></li>
+					</ul>
+				</p>
+            </div>
+		</div>
+
+		<div class="row">
+		</div>
+
+		
 		<hr />
+
 
         <!-- Footer -->
         <footer>
@@ -258,10 +214,11 @@
     <!-- /.container -->
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="../../js/jquery.js"></script>
 
  
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
  </body>
+
 </html>
