@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+
+ <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="USB Stick based Internet of Things">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<meta charset="UTF-8">  
+	<title>ThingySticks - Wide Photon Prototyping PCB</title>
+
+	<!-- Custom CSS -->
+    <link href="../css/round-about.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+ </head>
+
+ <body>
+	<!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">ThingySticks</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="DesignGuide">Design Guide</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/ThingySticks" target="_blank" alt="ThingySticks GitHub Repositories">GitHub</a>
+                    </li>
+					<li>
+                        <a href="https://Tinamous.com" target="_blank" alt="Tinamous.com IoT Platform">Tinamous.com</a>
+                    </li>
+				</ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+	<!-- Page Content -->
+    <div class="container">
+
+        <!-- Introduction Row -->
+        <div class="row">
+            <div class="col-lg-12">
+				<h1 class="page-header">Photon/Electron Thermocouple.</h1>
+                <p>Wi-Fi, Cellular or Bluetooth internet connected thermocouple. Measure temperatures that would otherwise break thermistors and regular sensors. Build around the <a href="https://Particle.io" target="_blank">Particle</a> <a href="https://www.particle.io/products/hardware/photon-wifi-dev-kit" target="_blank">Photon</a> and <a href="https://www.particle.io/products/hardware/electron-cellular-dev-kit" target="_blank">Electron</a>.</p>
+            </div>
+        </div>
+
+        <!-- Images -->
+        <div class="row">
+			<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="">
+
+				<!-- Indicators -->
+				<ol class="carousel-indicators">
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+					<li data-target="#myCarousel" data-slide-to="3"></li>
+					<li data-target="#myCarousel" data-slide-to="4"></li>
+					<li data-target="#myCarousel" data-slide-to="5"></li>
+					<li data-target="#myCarousel" data-slide-to="6"></li>
+				</ol>
+
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner" role="listbox">
+
+					<div class="item active">
+						<a href="Images/Connected.jpg">
+						<img class="img-responsive img-center" src="Images/Connected.jpg" alt="Probe Connected">
+						</a>		
+					</div>
+
+					<div class="item">
+						<a href="Images/PartAssembled.jpg">
+						<img class="img-responsive img-center" src="Images/PartAssembled.jpg" alt="Part Assembled">
+						</a>		
+					</div>
+
+					<div class="item">
+						<a href="Images/PcbTop-V1.1.png">
+						<img class="img-responsive img-center" src="Images/PcbTop-V1.1.png" alt="PCB Top">
+						</a>		
+					</div>
+
+					<div class="item">
+						<a href="Images/PcbBottom-V1.1.png">
+							<img class="img-responsive img-center" src="Images/PcbBottom-V1.1.png" alt="PCB Bottom">
+						</a>		
+					</div>
+
+					<div class="item">
+						<a href="Images/PcbTopDesign.png">
+							<img class="img-responsive img-center" src="Images/PcbTopDesign.png" alt="PCB Top Design">
+						</a>		
+					</div>
+
+					<div class="item">
+						<a href="Images/PcbBottomDesign.png">
+							<img class="img-responsive img-center" src="Images/PcbBottomDesign.png" alt="PCB Bottom Design">
+						</a>		
+					</div>
+				</div>
+
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+
+		<!-- Features -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Features</h2>
+				<p>
+					<ul>
+						<li>K Type Thermocouple amplified MAX31855K.</li>
+						<li>Works with Photon, Electron or Bluz.</li>
+						<li>Can be powered vua USB A Plug or the USB B socket on the Photon.</li>
+						<li>Additional features can be added through the easy access holes next to the Photon/Electron.</li>
+						<li>Selectable chip select (Defaults to A2) allows multiple boards to be stacked with a single Photon/Electron.</li>
+						<li>Additional I2C connected EEPROM memory (24LC512) allows for data logging.</li>
+					</ul>
+				</p>
+            </div>
+		</div>
+
+		<!-- Sample Code -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Sample Code</h2>
+				<pre>
+				<code>
+// This #include statement was automatically added by the Particle IDE.
+#include "adafruit-max31855/adafruit-max31855.h"
+
+int oshLogoLedPin = D7;
+
+// Memory...
+int eepromAddress = 0x50;
+
+#include "math.h"
+
+int thermoCLK = A3;
+int thermoCS = A2; // selectable
+int thermoDO = A4;
+
+AdafruitMAX31855 thermocouple(thermoCS); //hardware mode
+bool hasProbe = false;
+bool isCalibrated = false;
+
+int calibrate(String args);
+
+
+void setup() {
+    
+    pinMode(oshLogoLedPin, OUTPUT);
+    
+    // MAX31855 Thermocouple sensor.
+    thermocouple.init();
+    
+    Particle.function("calibrate", calibrate);
+    
+    Particle.publish("Status", "Thermocouple V0.1.0");
+    
+    // wait for MAX chip to stabilize and published message to go.
+    delay(500);
+}
+
+void loop() {
+    
+    digitalWrite(oshLogoLedPin, HIGH);
+    delay(1000);
+    
+    String senml = "{e:[";
+    
+    // Read the thermocouple temperatures.
+    double internalTemp = thermocouple.readInternal();
+    
+    if (isnan(internalTemp)) {
+        Particle.publish("status", "failed to read internal temperature.");
+    } else {
+        senml+="{'n':'internal','v':'" + String(internalTemp, DEC) + "'},";
+        double probeTemperature = thermocouple.readCelsius();
+    
+        if (isnan(probeTemperature)) {
+            Particle.publish("status", "No probe detected");
+            hasProbe = false;
+        } else {
+            hasProbe = true;
+            senml+="{'n':'probe','v':'" + String(probeTemperature, DEC) + "'},";
+        }
+    
+        senml +="]}";
+        Particle.publish("senml", senml, 60, PRIVATE);
+    }
+
+    digitalWrite(oshLogoLedPin, LOW);
+    
+    // TODO: Sleep to save power.
+    delay(5000);
+    
+    
+    // EEPROM TEST
+    //writeEEPROM(eepromAddress, 1, 127);
+    //byte read = readEEPROM(eepromAddress, 0);
+    //byte read1 = readEEPROM(eepromAddress, 1);
+    //Particle.publish("Status", "Read: " + String(read, DEC) + ", " + String(read1, DEC));
+}
+
+// From http://www.hobbytronics.co.uk/arduino-external-eeprom
+void writeEEPROM(int deviceaddress, unsigned int eeaddress, byte data ) 
+{
+  Wire.beginTransmission(deviceaddress);
+  Wire.write((int)(eeaddress >> 8));   // MSB
+  Wire.write((int)(eeaddress & 0xFF)); // LSB
+  Wire.write(data);
+  Wire.endTransmission();
+ 
+  delay(5);
+}
+ 
+// From http://www.hobbytronics.co.uk/arduino-external-eeprom
+byte readEEPROM(int deviceaddress, unsigned int eeaddress ) 
+{
+  byte rdata = 0xFF;
+ 
+  Wire.beginTransmission(deviceaddress);
+  Wire.write((int)(eeaddress >> 8));   // MSB
+  Wire.write((int)(eeaddress & 0xFF)); // LSB
+  Wire.endTransmission();
+ 
+  Wire.requestFrom(deviceaddress,1);
+ 
+  if (Wire.available()) rdata = Wire.read();
+ 
+  return rdata;
+}
+
+// ==================================================================
+// Particle functions
+// ==================================================================
+int calibrate(String args) {
+    
+    double internalTemp = thermocouple.readInternal();
+    double probeTemperature = thermocouple.readCelsius();
+
+    if (isnan(probeTemperature)) {
+        Particle.publish("status", "Could not calibrate, no probe detected.");
+        hasProbe = false;
+        isCalibrated = false;
+        return 0;
+    } else {
+        // Probe connected, do an initial calibration.
+        hasProbe = true;
+            
+        thermocouple.calibrate();
+            
+        double calibrationValue = thermocouple.readCalibration();
+    
+        String senml = "{e:[";    
+        senml+="{'n':'internal','v':'" + String(internalTemp, DEC) + "'},";
+        senml+="{'n':'calibrationValue','v':'" + String(calibrationValue, DEC) + "'},";
+        senml +="]}";
+        Particle.publish("senml", senml, 60, PRIVATE);
+        delay(500);
+        Particle.publish("status", "Calibrated at " + String(internalTemp, DEC) + "C");
+        isCalibrated = true;
+    }
+    
+    return 1;
+}					
+				</code>
+				</pre>
+            </div>
+		</div>
+
+		<!-- Schematic -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Schematic</h2>
+				<p>
+					<div class="item">
+						<a href="Images/Schematic-V1.1.png">
+							<img class="img-responsive img-center" src="Images/Schematic-V1.1.png" alt="Schematic">
+						</a>		
+					</div>
+				</p>
+            </div>
+		</div>
+
+		<!-- Dimensions -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Dimensions</h2>
+				<p>
+					<ul>
+						<li>Length: 96mm</li>
+						<li>Width: 33.5mm</li>
+						<li>Hole 1: 3.2mm at 13.9,16.8</li>
+						<li>Hole 2: 3.2mm at 92,4</li>
+						<li>Hole 3: 3.2mm at 92,29.5</li>
+					</ul>
+				<p>
+            </div>
+		</div>
+
+		<!-- References -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">References</h2>
+				<p>
+					<ul>
+						<li><a href="https://github.com/ThingySticks/Thermocouple">Design files.</a>
+						<li><a href="https://github.com/ThingySticks/Thermocouple/raw/master/DataSheets/MAX31855KASA%2BT.pdf">MAX31855KASA Datasheet.</a>
+						<li><a href="https://github.com/sparkfun/SparkFun-Eagle-Libraries">SparkFun's excellent Eagle libraries</a></li>
+						<li><a href="https://github.com/spark/electron/tree/master/libraries">Particle.io Eagle library</a></li>
+						<li><a href="https://github.com/spark/photon">Particle.io Photon Reference</a></li>
+						<li><a href="https://docs.particle.io/guide/getting-started/intro/photon/">Particles Electron Getting Started Guide</a></li>
+					</ul>
+				</p>
+            </div>
+		</div>
+
+		<div class="row">
+		</div>
+
+		<hr />
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+					<p>
+					<a href="https://www.facebook.com/ThingySticks">Facebook.com/ThingySticks</a>, 
+					<a href="https://twitter.com/ThingySticks">@ThingySticks</a>,
+					Copyright &copy; Analysis UK Ltd 2016 - 2017
+					</p>
+					<p>ThingySticks and Thing On A Stick are Registered Trade Marks of Analysis UK Ltd.</p>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../js/jquery.js"></script>
+
+ 
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+ </body>
+
+</html>
