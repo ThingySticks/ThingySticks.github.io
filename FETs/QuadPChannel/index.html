@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+ <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Internet of Things low voltage DC switching with P-Channel FETs. Ideal for DC motors, fans, LED light etc.">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<meta charset="UTF-8">  
+	<title>ThingySticks - Quad P-Channel FETs</title>
+
+	<!-- Custom CSS -->
+    <link href="../../css/round-about.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-89870513-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+ </head>
+
+ <body>
+ <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">ThingySticks</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="https://github.com/ThingySticks" target="_blank" alt="ThingySticks GitHub Repositories">GitHub</a>
+                    </li>
+					<li>
+                        <a href="https://Tinamous.com" target="_blank" alt="Tinamous.com IoT Platform">Tinamous.com</a>
+                    </li>
+				</ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+	<!-- Page Content -->
+    <div class="container">
+
+        <!-- Introduction Row -->
+        <div class="row">
+            <div class="col-xs-11 col-sm-7 col-xs-offset-1">
+				<h1 class="page-header">Quad P-Channel FETs</h1>
+                <p>Switch high current DC loads with the <a href="https://Particle.io" target="_blank">Particle</a> <a href="https://www.particle.io/products/hardware/photon-wifi-dev-kit" target="_blank">Photon</a> or <a href="https://www.particle.io/products/hardware/electron-cellular-dev-kit" target="_blank">Electron</a>.</p>
+            </div>
+			<div class="col-xs-11 col-sm-2 col-xs-offset-1 col-sm-offset-1">
+				<div class="pull-right" style="margin:40px 0 20px">
+					<!--
+					<a href="#" class="btn btn-success btn-lg">Buy now on Tindie</a>
+					-->
+					<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#mailingListModal">Buy</button>
+				</div>
+			</div>
+        </div>
+
+        <!-- Images -->
+        <div class="row">
+			<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="">
+
+				<!-- Indicators -->
+				<ol class="carousel-indicators">
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+					<li data-target="#myCarousel" data-slide-to="3"></li>
+				</ol>
+
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner" role="listbox">
+					<!--
+					<div class="item">
+						<a href="Images/FullyAssembled.jpg">
+							<img class="img-responsive img-center" src="Images/FullyAssembled.jpg" alt="Assembled">
+						</a>	
+					</div>
+
+					<div class="item">
+						<a href="Images/FullyAssembled2.jpg">
+							<img class="img-responsive img-center" src="Images/FullyAssembled2.jpg" alt="Assembled">
+						</a>	
+					</div>	
+					-->
+
+					<div class="item">
+						<a href="Images/PcbTop.png">
+							<img class="img-responsive img-center" src="Images/PcbTop.png" alt="PCB Top">
+						</a>		
+					</div>
+
+					<div class="item">
+						<a href="Images/PcbBottom.png">
+							<img class="img-responsive img-center" src="Images/PcbBottom.png" alt="PCB Bottom">
+						</a>		
+					</div>
+
+					<div class="item">
+						<a href="Images/PcbTopDesign.png">
+							<img class="img-responsive img-center" src="Images/PcbTopDesign.png" alt="PCB Top Design">
+						</a>		
+					</div>
+
+					<div class="item">
+						<a href="Images/PcbBottomDesign.png">
+							<img class="img-responsive img-center" src="Images/PcbBottomDesign.png" alt="PCB Bottom Design">
+						</a>		
+					</div>
+				</div>
+
+				<!-- Left and right controls -->
+				<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
+		</div>
+
+		<!-- Features -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Features</h2>
+				<p>
+					<ul>
+						<li>Coming Soon...</li>
+					</ul>
+				</p>
+            </div>
+		</div>
+				<!-- Sample Code -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Sample Code</h2>
+				<pre>
+				<code>
+int Fet1 = D2; // Or B0 - Red LED
+int Fet2 = A4; // Or B1 - Yellow LED
+int Fet3 = D3; // Or B2 - Green LED
+int Fet4 = A3; // Or B3 - Buzzer
+
+// Output pins (as array)
+int outputs[] = {D2, A4, D3, A3};
+
+// Particle function definitions
+int SwitchOutputOn (String args);
+int SwitchOutputOff (String args);
+int SwitchLightOn (String args);
+int SwitchLightOff (String args);
+int ShowSequence (String args);
+
+bool showSequenceEnabled = false;
+
+void setup() {
+    // Debug LED.
+    pinMode(D7, OUTPUT);
+    
+    for (int i = 0; i<4; i++) {
+        // Set-up the pin as output.
+        pinMode(outputs[i], OUTPUT);
+        // Ensure it is switched off.
+        digitalWrite(outputs[i], LOW);
+    }
+    
+    // Declare the functions exposed to the internet.
+    Particle.function("OutputOn", SwitchOutputOn);
+    Particle.function("OutputOff", SwitchOutputOff);
+    Particle.function("LightOn", SwitchLightOn);
+    Particle.function("LightOff", SwitchLightOff);
+    Particle.function("showSeq", ShowSequence);
+    
+    // Publish our online message.
+    publishStatus("Fets and Lights. V0.3");
+}
+
+void loop() {
+    
+    digitalWrite(D7, HIGH);
+
+    if (showSequenceEnabled) {
+        runSequence();
+    } else {
+        delay(1000);
+    }
+    
+    digitalWrite(D7, LOW);
+    delay(1000);
+}
+
+void runSequence() {
+    for (int i = 0; i<4; i++) {
+        digitalWrite(outputs[i], HIGH);
+        delay(1000);
+        digitalWrite(outputs[i], LOW);
+    }
+}
+
+// ==========================================
+// Particle Functions
+// ==========================================
+
+// Switch the output channel on
+// Use the channel number (1-4) for the argument
+int SwitchOutputOn (String args) {
+    int channel = args.toInt();
+    switchOnChannel(channel);
+    returP Channel;
+}
+
+// Switch the output channel off
+// Use the channel number (1-4) for the argument
+int SwitchOutputOff (String args) {
+    int channel = args.toInt();
+    switchOffChannel(channel);
+    returP Channel;
+}
+
+// Switch the light on for a given named color
+// Red, Yellow, Green, Buzzer (I know, buzzer isn't a color!)
+int SwitchLightOn (String args) {
+    int channel = getChannel(args);
+    switchOnChannel(channel);
+    returP Channel;
+}
+
+// Switch the light off for a given named color
+// Red, Yellow, Green, Buzzer
+int SwitchLightOff (String args) {
+    int channel = getChannel(args);
+    switchOffChannel(channel);
+    returP Channel;
+}
+
+// Start the channel sequence.
+int ShowSequence (String args) {
+    showSequenceEnabled = true;
+    return 1;
+}
+
+// --------------------------------------
+// Helpers
+// --------------------------------------
+int switchOnChannel(int channel) {
+    // Convert channel (1-4) to array index (0-3)
+    int arrayIndex = channel - 1;
+    digitalWrite(outputs[arrayIndex], HIGH);
+    
+    publishStatus("Channel " + String(channel) + " On.");
+}
+
+int switchOffChannel(int channel) {
+    // Convert channel (1-4) to array index (0-3)
+    int arrayIndex = channel - 1;
+    digitalWrite(outputs[arrayIndex], LOW);
+    
+    publishStatus("Channel " + String(channel) + " Off.");
+}
+
+
+int getChannel(String color) {
+    
+    String lowerColor = color.toLowerCase();
+
+    // Doesn't support String switch/case.
+    if (lowerColor == "red") {
+        return 1;
+    } else if (lowerColor == "yellow") {
+        return 2;
+    } else if (lowerColor ==  "green") {
+        return 3;
+    } else if (lowerColor ==  "buzzer") {
+        return 4;
+    } else {
+        // light up the red light.
+        return 0;
+    }
+}
+
+void publishStatus(String message) {
+    Particle.publish("status", message);
+}
+				</code>
+				</pre>
+			</div>
+		</div>
+
+		<!-- Schematic -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Schematic</h2>
+				<p>
+					<div class="item">
+						<a href="Images/Schematic-V1.1.png">
+							<img class="img-responsive img-center" src="Images/Schematic.png" alt="Schematic">
+						</a>		
+					</div>
+				</p>
+            </div>
+		</div>
+
+		<!-- Pcb Layout -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">PCB Layout</h2>
+				<div>
+					<a href="Images/PcbTopDesign.png">
+						<img class="img-responsive img-center" src="Images/PcbTopDesign.png" alt="PCB Top Layer">
+					</a>		
+				</div>
+				<div>
+					<a href="Images/PcbBottomDesign.png">
+						<img class="img-responsive img-center" src="Images/PcbBottomDesign.png" alt="PCB Bottom Layer">
+					</a>		
+				</div>
+            </div>
+		</div>
+
+		<!-- Dimensions -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Dimensions</h2>
+				<p>
+					<ul>
+						<li>Length: 99mm</li>
+						<li>Width: 40mm</li>
+						<li>Hole 1: 3.2mm at 14.5,20</li>
+						<li>Hole 2: 3.2mm at 75,4</li>
+						<li>Hole 3: 3.2mm at 75,36</li>
+					</ul>
+				<p>
+            </div>
+		</div>
+
+		<!-- References -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">References</h2>
+				<p>
+					<ul>
+						<li><a href="https://github.com/ThingySticks/P-FETs">Design files.</a>
+						<li><a href="https://github.com/sparkfun/SparkFun-Eagle-Libraries">SparkFun's excellent Eagle libraries</a></li>
+						<li><a href="https://github.com/spark/electron/tree/master/libraries">Particle.io Eagle library</a></li>
+						<li><a href="https://github.com/spark/photon">Particle.io Photon Reference</a></li>
+						<li><a href="https://docs.particle.io/guide/getting-started/intro/photon/">Particles Electron Getting Started Guide</a></li>
+					</ul>
+				</p>
+            </div>
+		</div>
+
+		<!-- Ordering -->
+		<div class="row">
+			<div class="col-lg-12">
+                <h2 class="page-header">Ordering Options</h2>
+				<p>
+				<!--
+					<a href="https://www.tindie.com/products/ThingySticks/prototype-pcb-for-particle-photon/" class="btn btn-success btn-lg">Buy the kit on Tindie.</a> -->
+
+					<a href="https://oshpark.com/shared_projects/hoUzhQIf"><img src="https://oshpark.com/assets/badge-5b7ec47045b78aef6eb9d83b3bac6b1920de805e9a0c227658eac6e19a045b9c.png" alt="Order from OSH Park"></img></a>
+				</p>	
+			</div>
+		</div>
+
+		<div class="row">
+		</div>
+
+		
+		<hr />
+
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+					<p>
+					<a href="https://www.facebook.com/ThingySticks">Facebook.com/ThingySticks</a>, 
+					<a href="https://twitter.com/ThingySticks">@ThingySticks</a>,
+					Copyright &copy; Analysis UK Ltd 2016 - 2017
+					</p>
+					<p>ThingySticks and Thing On A Stick are Registered Trade Marks of Analysis UK Ltd.</p>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+	<!-- Mailing List Modal -->
+	<div id="mailingListModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Coming Soon!!!</h4>
+		  </div>
+		  <div class="modal-body">
+			<p>Sorry, this stick isn't currently available to buy on Tindie. Please join our mailing list to get notified when this and other sticks become available to buy.</p>
+			<p>If you are in a hurry then Tweet me <a href="https://Twitter.com/ThingySticks">@ThingySticks</a>.</p>
+				<!-- Begin MailChimp Signup Form -->
+				<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+				<style type="text/css">
+					#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+					/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+					   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+				</style>
+				<div id="mc_embed_signup">
+				<form action="//AnalysisUK.us1.list-manage.com/subscribe/post?u=74dabe4c282863f4c5460a513&amp;id=9b0dd576ee" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+					<div id="mc_embed_signup_scroll">
+					<h2>Subscribe to our mailing list</h2>
+				<div class="mc-field-group">
+					<label for="mce-EMAIL">Email Address </label>
+					<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+				</div>
+					<div id="mce-responses" class="clear">
+						<div class="response" id="mce-error-response" style="display:none"></div>
+						<div class="response" id="mce-success-response" style="display:none"></div>
+					</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+					<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_74dabe4c282863f4c5460a513_9b0dd576ee" tabindex="-1" value=""></div>
+					<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+					</div>
+				</form>
+				</div>
+				<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+				<!--End mc_embed_signup-->
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  </div>
+		</div>
+
+	  </div>
+	</div>
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+ 
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+ </body>
+
+</html>
