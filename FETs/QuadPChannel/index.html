@@ -73,9 +73,17 @@
 
         <!-- Introduction Row -->
         <div class="row">
+			<div class="col-xs-11 col-xs-offset-1">
+				<div class="alert alert-danger" role="alert">
+				  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				  <span class="sr-only">Caution: </span>
+				  Work in progress. Untested.
+				</div>
+			</div>
+
             <div class="col-xs-11 col-sm-7 col-xs-offset-1">
 				<h1 class="page-header">Quad P-Channel FETs</h1>
-                <p>Switch high current DC loads with the <a href="https://Particle.io" target="_blank">Particle</a> <a href="https://www.particle.io/products/hardware/photon-wifi-dev-kit" target="_blank">Photon</a> or <a href="https://www.particle.io/products/hardware/electron-cellular-dev-kit" target="_blank">Electron</a>.</p>
+                <p>Switch high current DC loads with the <a href="https://Particle.io" target="_blank">Particle</a> <a href="https://www.particle.io/products/hardware/photon-wifi-dev-kit" target="_blank">Photon</a> or <a href="https://www.particle.io/products/hardware/electron-cellular-dev-kit" target="_blank">Electron</a>. High side switching, ideal for devices that have a common ground (e.g. LED beacons) or fans that have a sensor connected to ground which would be effected if PWMing the ground.</p>
             </div>
 			<div class="col-xs-11 col-sm-2 col-xs-offset-1 col-sm-offset-1">
 				<div class="pull-right" style="margin:40px 0 20px">
