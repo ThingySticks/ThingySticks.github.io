@@ -191,11 +191,12 @@
 				<code>
 int Fet1 = D2; // Or B0 - Red LED
 int Fet2 = A4; // Or B1 - Yellow LED
-int Fet3 = D3; // Or B2 - Green LED
-int Fet4 = A3; // Or B3 - Buzzer
+int Fet3 = D3; // Or B2 - Green LED - A4 and D3 Share PWM.
+int Fet4 = A5; // Or B3 - Buzzer  - NB: N-CHannel FETs V1.1 uses A3 instead of A5. - A3 does not support PWM. PWM shared with D2
 
 // Output pins (as array)
-int outputs[] = {D2, A4, D3, A3};
+// NB: N-CHannel FETs V1.1 uses A3 instead of A5.
+int outputs[] = {D2, A4, D3, A5};
 
 // Particle function definitions
 int SwitchOutputOn (String args);
@@ -411,7 +412,7 @@ void publishStatus(String message) {
 				<!--
 					<a href="https://www.tindie.com/products/ThingySticks/prototype-pcb-for-particle-photon/" class="btn btn-success btn-lg">Buy the kit on Tindie.</a> -->
 
-					<a href="https://oshpark.com/shared_projects/kG05zLkA"><img src="https://oshpark.com/assets/badge-5b7ec47045b78aef6eb9d83b3bac6b1920de805e9a0c227658eac6e19a045b9c.png" alt="Order from OSH Park"></img></a>
+					<a href="https://oshpark.com/shared_projects/uvMkraSb"><img src="https://oshpark.com/assets/badge-5b7ec47045b78aef6eb9d83b3bac6b1920de805e9a0c227658eac6e19a045b9c.png" alt="Order from OSH Park"></img></a>
 				</p>	
 			</div>
 		</div>
