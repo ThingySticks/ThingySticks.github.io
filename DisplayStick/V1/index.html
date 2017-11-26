@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+ <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Internet of Things Display Stick for the Particle Photon or Electron.">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<meta charset="UTF-8">  
+	<title>ThingySticks - Display Stick with Prototyping Area.</title>
+
+	<!-- Custom CSS -->
+    <link href="../../css/round-about.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	<link rel="icon" href="../../favicon32.png" sizes="32x32" type="image/png">  
+	<link rel="icon" href="../../favicon62.png" sizes="62x62" type="image/png">  
+	<link rel="icon" href="../../favicon192.png" sizes="192x192" type="image/png">  
+
+	<meta property="og:url" content="http://ThingySticks.com/Environment/V2">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Environmental Sensor ThingySticks">
+	<meta property="og:image" content="http://ThingySticks.com/DisplayStick/V1/Images/WiFiStrength.jpg">
+	<meta property="og:description" content="Display Stick for the Particle Photon and 2.8 TFT SPI touch display.">
+	<meta property="og:site_name" content="ThingySticks">
+
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-89870513-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+ </head>
+
+ <body>
+ <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">ThingySticks</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="https://github.com/ThingySticks" target="_blank" alt="ThingySticks GitHub Repositories">GitHub</a>
+                    </li>
+					<li>
+                        <a href="https://Tinamous.com" target="_blank" alt="Tinamous.com IoT Platform">Tinamous.com</a>
+                    </li>
+				</ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+	<!-- Page Content -->
+    <div class="container">
+
+        <!-- Introduction Row -->
+        <div class="row">
+            <div class="col-xs-11 col-sm-7 col-xs-offset-1">
+				<h1 class="page-header">Display Stick</h1>
+                <p>Connect a 2.8" TFT SPI 240x320 TJCTM24028-SPI Display with prototyping area underneath with for the <a href="https://Particle.io" target="_blank">Particle</a> <a href="https://www.particle.io/products/hardware/photon-wifi-dev-kit" target="_blank">Photon</a>.</p>
+            </div>
+			<div class="col-xs-11 col-sm-2 col-xs-offset-1 col-sm-offset-1">
+				<!--
+				<div class="pull-right" style="margin:40px 0 20px">
+					<a href="https://www.tindie.com/products/ThingySticks/environment-sensor-for-the-photon-or-electron/" class="btn btn-success btn-lg">Buy now on Tindie</a>
+				</div>
+				-->
+			</div>
+        </div>
+
+        <!-- Images -->
+        <div class="row">
+			<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="">
+
+				<!-- Indicators -->
+				<ol class="carousel-indicators">
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+					<li data-target="#myCarousel" data-slide-to="3"></li>
+					<li data-target="#myCarousel" data-slide-to="4"></li>
+				</ol>
+
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner" role="listbox">
+					<div class="item active">
+						<a href="Images/WiFiStrength.jpg">
+							<img class="img-responsive img-center" src="Images/WiFiStrength.jpg" alt="Using the Photon as a WiFi strength indicator.">
+						</a>	
+					</div>
+
+					<div class="item">
+						<a href="Images/SideView.jpg">
+							<img class="img-responsive img-center" src="Images/SideView.jpg" alt="Side View">
+						</a>	
+					</div>
+
+					<div class="item">
+						<a href="Images/LightHumidityPressure.jpg">
+							<img class="img-responsive img-center" src="Images/PcbAndDisplay.jpg" alt="Pcb and Display">
+						</a>	
+					</div>
+
+					<div class="item">
+						<a href="Images/Display.jpg">
+							<img class="img-responsive img-center" src="Images/Display.jpg" alt="The display module the PCB is designed for.">
+						</a>	
+					</div>
+
+					<div class="item">
+						<a href="Images/PcbTopDesign.png">
+							<img class="img-responsive img-center" src="Images/PcbTopDesign.png" alt="PCB Top">
+						</a>	
+					</div>
+
+					<div class="item">
+						<a href="Images/PcbBottomDesign.png">
+							<img class="img-responsive img-center" src="Images/PcbBottomDesign.png" alt="PCB Bottom">
+						</a>	
+					</div>
+
+
+				</div>
+
+				<!-- Left and right controls -->
+				<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
+		</div>
+
+		<!-- Features -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Features</h2>
+				<p>
+					<ul>
+						<li>Designed for TJCTM 2.8" TFT display readily available from eBay</li>
+						<li>Interface to display, touch controller and SD Card</li>
+						<li>Large prototyping area underneath display</li>
+						<li>Additional features can be added through the easy access holes next to the Photon/Electron.</li>
+						<li>Headers can connect the stick onto the Particle <a href="https://store.particle.io/collections/shields-and-kits">Asset Tracker</a> or other ThingySticks.</li>
+					</ul>
+				</p>
+            </div>
+		</div>
+		
+		<!-- Sample Code -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Sample Code</h2>
+				<p>Displays the WiFi signal strength. Requires Adafruit_mfGFX, Adafruit_ILI9341 and XPT2046 libraries.</p>
+				<p>Source code at: <a href="https://go.particle.io/shared_apps/5a1a42c221b3e8bcb8000571">https://go.particle.io/shared_apps/5a1a42c221b3e8bcb8000571</a>
+				<pre>
+				<code>
+// This #include statement was automatically added by the Particle IDE.
+#include "Adafruit_ILI9341.h"
+
+// This #include statement was automatically added by the Particle IDE.
+#include "XPT2046.h"
+
+// This #include statement was automatically added by the Particle IDE.
+#include <Adafruit_mfGFX.h>
+
+
+// Screen. See: 
+// http://nailbuster.com/?page_id=341
+
+// =======================================
+// A0 -> SD Card CS (Needs wire + 10k pullup)
+// A1 -> Touch CS (Needs Wire + 10k pullup)
+// A2 -> TFT CS
+// D2 -> TFT DC
+// D3 -> TFT RST
+// A3 -> SCK
+// A4 -> MOSI
+// A5 -> MISO
+// WKP -> Touch IRQ (with 0R Linker resitor R7)
+// Display LED +3v3 needs 0R link resistor
+// Dispolay reset needs 10k pullup.
+// =======================================
+
+// Display uses ILI9341 - Driver from Adafruit 
+// Touch uses XPT2046 - Driver from https://github.com/spapadim/XPT2046
+
+int TFT_CS = A2;
+int TFT_DC = D2;
+int TFT_RESET = D3;
+Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, 0);
+
+// Change from V1.0 PCB, IRQ now on RX not WKP
+XPT2046 touch(/*cs=*/ A1, /*irq=*/ RX);
+
+volatile int showTouched = false;
+
+void setup() {
+    SPI.setClockDividerReference(SPI_CLK_ARDUINO);
+    SPI.setClockDivider(SPI_CLOCK_DIV32);
+    
+    tft.begin();
+    
+    // Display we are using is the 2.8" 240x320
+    touch.begin(240, 320);
+    attachInterrupt(WKP, touched, CHANGE); // CHANGE, RISING
+
+    tft.setRotation(2);  
+    tft.fillScreen(ILI9341_BLACK);
+    tft.setCursor(0, 0);
+    tft.setTextColor(ILI9341_YELLOW);
+    tft.setTextSize(3);
+    
+    tft.setRotation(3);
+    tft.setTextSize(4);
+    tft.setCursor(0, 0);
+    tft.println("WiFi....");
+    tft.setCursor(0, 65);
+    tft.println("Signal...");
+    tft.setCursor(0, 130);
+    tft.println("Meter......");
+    
+    Particle.publish("status", "WiFi Display Stick v0.0.3");
+    delay(2000);
+    tft.setRotation(3);
+    
+}
+
+// ISR for display touch
+void touched() {
+    // If measuring the touch ADC this should be ignored as 
+    // it is taken low!
+    showTouched = true;
+}
+
+int count = 0;
+void loop() {
+    
+    tft.fillScreen(ILI9341_BLACK);
+    int rssi = WiFi.RSSI();
+    
+    tft.setCursor(0, 0);
+    tft.println("RSSI: " + String(rssi, DEC));
+    String senml = "{'n':'rssi', 'v':" + String(rssi, DEC) + "}";
+    Particle.publish("senml", "{'e': [ " + senml + "]}");
+        
+    /*
+    for(uint8_t rotation=0; rotation<4; rotation++) {
+        tft.setRotation(rotation);
+        testText();
+        delay(10);
+    }
+    */
+
+    
+    if (touch.isTouching()) {
+        uint16_t x, y;
+        touch.getPosition(x, y);
+        tft.fillScreen(ILI9341_BLACK);
+        // Swap Antenna>
+        //tft.setCursor(0, 0);
+        //tft.println("x: 0x" + String(x, HEX));
+        //tft.println("y: 0x" + String(y, HEX));
+            
+        delay(100);
+        count++;
+    }
+
+    delay(5000);
+}
+
+				</code>
+				</pre>
+			</div>
+		</div>
+
+		<!-- Schematic -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Schematic</h2>
+				<p>
+					<div class="item">
+						<a href="Images/Schematic.png">
+							<img class="img-responsive img-center" src="Images/Schematic.png" alt="Schematic">
+						</a>		
+					</div>
+				</p>
+            </div>
+		</div>
+
+		<!-- Pcb Layout -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">PCB Layout</h2>
+				<div>
+					<a href="Images/PcbTopDesign.png">
+						<img class="img-responsive img-center" src="Images/PcbTopDesign.png" alt="PCB Top Layer">
+					</a>		
+				</div>
+				<div>
+					<a href="Images/PcbBottomDesign.png">
+						<img class="img-responsive img-center" src="Images/PcbBottomDesign.png" alt="PCB Bottom Layer">
+					</a>		
+				</div>
+            </div>
+		</div>
+
+		<!-- Dimensions -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Dimensions</h2>
+				<p>
+					<ul>
+						<li>Length: 130mm</li>
+						<li>Width: 50mm</li>
+						<li>Hole 1: 3.2mm at 25,14</li>
+						<li>Hole 2: 3.2mm at 3,50.9</li>
+						<li>Hole 3: 3.2mm at 47,50.9</li>
+						<li>Hole 4: 3.2mm at 3,127</li>
+						<li>Hole 5: 3.2mm at 47,127</li>
+					</ul>
+				<p>
+            </div>
+		</div>
+
+		<!-- References -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">References</h2>
+				<p>
+					<ul>
+						<li><a href="https://github.com/ThingySticks/DisplayStick/tree/master/Photon/V1">Design files</a>
+						<li><a href="https://go.particle.io/shared_apps/5a1a42c221b3e8bcb8000571">Example code</a>
+						<li><a href="https://github.com/sparkfun/SparkFun-Eagle-Libraries">SparkFun's excellent Eagle libraries</a></li>
+						<li><a href="https://github.com/spark/electron/tree/master/libraries">Particle.io Eagle library</a></li>
+						<li><a href="https://github.com/spark/photon">Particle.io Photon Reference</a></li>
+						<li><a href="https://docs.particle.io/guide/getting-started/intro/photon/">Particles Electron Getting Started Guide</a></li>
+					</ul>
+				</p>
+            </div>
+		</div>
+
+		<!-- Ordering -->
+		<div class="row">
+			<div class="col-lg-12">
+                <h2 class="page-header">Ordering Options</h2>
+				<p>
+					<!--
+					<a href="https://www.tindie.com/products/ThingySticks/environment-sensor-for-the-photon-or-electron/" class="btn btn-success btn-lg">Buy on Tindie.</a>
+
+					<a href="https://oshpark.com/shared_projects/0NK63Pt3"><img src="https://oshpark.com/assets/badge-5b7ec47045b78aef6eb9d83b3bac6b1920de805e9a0c227658eac6e19a045b9c.png" alt="Order from OSH Park"></img></a>
+					-->
+				</p>	
+			</div>
+		</div>
+
+		<div class="row">
+		</div>
+
+		
+		<hr />
+
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+					<p>
+					<a href="https://www.facebook.com/ThingySticks">Facebook.com/ThingySticks</a>, 
+					<a href="https://twitter.com/ThingySticks">@ThingySticks</a>,
+					Copyright &copy; Analysis UK Ltd 2016 - 2017
+					</p>
+					<p>ThingySticks and Thing On A Stick are Registered Trade Marks of Analysis UK Ltd.</p>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+	<!-- Mailing List Modal -->
+	<div id="mailingListModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Coming Soon!!!</h4>
+		  </div>
+		  <div class="modal-body">
+			<p>Sorry, this stick isn't currently available to buy on Tindie. Please join our mailing list to get notified when this and other sticks become available to buy.</p>
+			<p>If you are in a hurry then Tweet me <a href="https://Twitter.com/ThingySticks">@ThingySticks</a>.</p>
+				<!-- Begin MailChimp Signup Form -->
+				<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+				<style type="text/css">
+					#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+					/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+					   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+				</style>
+				<div id="mc_embed_signup">
+				<form action="//AnalysisUK.us1.list-manage.com/subscribe/post?u=74dabe4c282863f4c5460a513&amp;id=9b0dd576ee" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+					<div id="mc_embed_signup_scroll">
+					<h2>Subscribe to our mailing list</h2>
+				<div class="mc-field-group">
+					<label for="mce-EMAIL">Email Address </label>
+					<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+				</div>
+					<div id="mce-responses" class="clear">
+						<div class="response" id="mce-error-response" style="display:none"></div>
+						<div class="response" id="mce-success-response" style="display:none"></div>
+					</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+					<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_74dabe4c282863f4c5460a513_9b0dd576ee" tabindex="-1" value=""></div>
+					<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+					</div>
+				</form>
+				</div>
+				<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+				<!--End mc_embed_signup-->
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  </div>
+		</div>
+
+	  </div>
+	</div>
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+ 
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+ </body>
+
+</html>
