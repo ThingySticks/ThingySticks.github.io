@@ -204,7 +204,135 @@
         <div class="row">
             <div class="col-lg-12">
                 <h2 class="page-header">Sample Code</h2>
+				<a href="https://go.particle.io/shared_apps/5a56a5d1faa638afe9000b8d">Shared via Particle Build</a>
+				<pre>
 				<code>
+// This #include statement was automatically added by the Particle IDE.
+#include &lt;Adafruit_BME280.h&gt;
+
+// ThingySticks Air Quality Stick.
+// CCS811 (TVOC and eCO2)
+// BME280 (Temperature, Humidity, Pressure)
+// TEMT6000 (Light level)
+
+
+//  CCS811 sample code/library from:
+//  https://github.com/sparkfun/CCS811_Air_Quality_Breakout
+//  https://github.com/sparkfun/SparkFun_CCS811_Arduino_Library
+
+//  A new sensor requires at 48-burn in. Once burned in a sensor requires
+//  20 minutes of run in before readings are considered good.
+
+#include "SparkFunCCS811.h"
+
+#define CCS811_ADDR 0x5B //Default I2C Address
+//#define CCS811_ADDR 0x5A //Alternate I2C Address
+
+#define SEALEVELPRESSURE_HPA (1013.25)
+
+// ==================================
+// PIN Connections V4.0.1 PCB
+// LED                  DAC
+// Photodiode           A1
+// WAKE     (CCS811)    D6
+// RESET    (CCS811)    D5
+// INT      (CCS811)    D4
+// SCL                  D1
+// SDA                  D0
+
+CCS811 ccs(CCS811_ADDR);
+
+Adafruit_BME280 bme;
+
+#define LED_PIN             DAC
+#define LIGHT_SENSOR_PIN    A1
+
+bool hasCCS = true;
+bool hasBme = true;
+
+void setup()
+{
+    pinMode(D7, OUTPUT);
+    pinMode(LED_PIN, OUTPUT);
+    digitalWrite(D7, LOW);
+    digitalWrite(LED_PIN, LOW);
+    
+    Serial.begin(9600);
+    Serial.println("ThingySticks V4 Environment Monitor");
+    
+    
+    if (!bme.begin(0x77)) {
+      Particle.publish("status","BME280 not found");
+      Serial.println("Error: BME280 Not Found!");
+      digitalWrite(D7, HIGH);
+      hasBme = false;
+    } else {
+        Particle.publish("status","BME280 initialized");
+        delay(1000);
+    }
+    
+
+    //It is recommended to check return status on .begin(), but it is not
+    //required.
+    CCS811Core::status returnCode = ccs.begin();
+    if (returnCode != CCS811Core::SENSOR_SUCCESS)
+    {
+        Particle.publish("status","CCS811 returned error. Error: " + String(returnCode));
+        Serial.println("Error: CCS811 Not Found!");
+        digitalWrite(D7, HIGH);
+        hasCCS = false;
+    } else {
+        Particle.publish("status","CCS811 initialized.");
+        delay(1000);
+    }
+
+    Particle.publish("status","Environment V4 Online. V0.0.12");
+    delay(1000);
+}
+
+void loop()
+{
+    digitalWrite(LED_PIN, HIGH);
+    String senml = "";
+    
+    senml += "{'n':'Light','v': " + String(analogRead(LIGHT_SENSOR_PIN)) + "}";
+    
+    if (hasCCS) {
+        
+      //Check to see if data is ready with .dataAvailable()
+      if (ccs.dataAvailable())
+      {
+        //If so, have the sensor read and calculate the results.
+        //Get them later
+        ccs.readAlgorithmResults();
+    
+        senml += ",{'n':'CO2','v': " + String(ccs.getCO2()) + "}";
+        senml += ",{'n':'TVOC','v': " + String(ccs.getTVOC()) + "}";
+      } else {
+          if (ccs.checkForStatusError()) {
+            uint8_t error = ccs.getErrorRegister();
+            Particle.publish("status", "Status error: " + String(error));    
+          }
+      }
+    }
+  
+    if (hasBme) {
+        senml += ",{'n':'T','v': " + String(bme.readTemperature()) + "}";
+        senml += ",{'n':'P','v': " + String(bme.readPressure() / 100.0F) + "}";
+        senml += ",{'n':'A','v': " + String(bme.readAltitude(SEALEVELPRESSURE_HPA)) + "}";
+        senml += ",{'n':'H','v': " + String(bme.readHumidity()) + "}";    
+    }
+
+    if (senml != "") {
+        Serial.println("Senml: " + senml);
+        Particle.publish("senml", "{'e':[" + senml + "]}");
+        delay(2000);
+    }
+    digitalWrite(LED_PIN, LOW);
+    
+    //System.sleep(SLEEP_MODE_DEEP, 30);
+    delay(30000);
+}
 				</code>
 				</pre>
 			</div>
@@ -264,7 +392,7 @@
 				<p>
 					<ul>
 						<li><a href="https://github.com/ThingySticks/EnvironmentMonitor/tree/master/Electron/V4">Design files</a>
-						<li><a href="https://github.com/ThingySticks/EnvironmentMonitor/tree/master/Electron/V4/Software">Example code</a>
+						<li><a href="https://go.particle.io/shared_apps/5a56a5d1faa638afe9000b8d">Example code</a>
 						<li><a href="https://github.com/sparkfun/SparkFun-Eagle-Libraries">SparkFun's excellent Eagle libraries</a></li>
 						<li><a href="https://www.sparkfun.com/products/14193">SparkFun's CCS811 breakout board</a></li>
 						<li><a href="https://github.com/spark/electron/tree/master/libraries">Particle.io Eagle library</a></li>
