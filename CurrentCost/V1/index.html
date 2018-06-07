@@ -183,7 +183,502 @@
         <div class="row">
             <div class="col-lg-12">
                 <h2 class="page-header">Sample Code</h2>
+				<pre>
+				<code>
 				
+// Pin Connection:
+// Photon 3v3 -> RJ45 Pin 1
+// Photon GND -> RJ45 Pin 4
+// Photon RX -> RJ45 Pin 8
+// Photon D3 -> 1k Resistor -> LED
+
+// Allows for a maximum of 12 sensors.
+#define MAX_SENSORS 12
+
+// Number of appliance's defined
+// these are used to determine if an appliance 
+// is active or not.
+#define MAX_APPLIANCES 4
+
+// Serial receive buffer. 
+// Cleared when processing begins (i.e. the end terminator is seen)
+String buffer = "";
+
+// Intermediary buffer that takes the buffer message
+// and appends it, so that it can split messages up.
+String messageBuffer = "";
+
+// The message being processed.
+//String message = "";
+
+// If the start of an xml element has been found.
+bool foundStart = false;
+
+// Temperature measured by the Current Cost unit (display unit)
+String temperature = "";
+
+typedef struct {
+    // Dish washer etc.
+    String name;
+    
+    // which sensor to monitor 
+    int sensorId;
+    
+    // What delta level is needed to trigger this appliance
+    // as being on.
+    long triggerLevelLower;
+    long triggerLevelUpper;
+    
+    // When this was last triggered 
+    // Not always possible to judge when applience goes off from power
+    // usage so give an estimated time.
+    long lastTriggeredAt;
+    
+    // Time this trigger can be reset after.
+    long resetAfter;
+    
+    // How long from the last triggered at
+    // the trigger should be reset after.
+    long reTriggerDelaySeconds;
+    
+    bool isTriggered;
+    
+    // How many times the trigger has been 
+    int triggerCount;
+    
+    // How long it was on for this time it was used.
+    int durationSeconds;
+    
+    // Overall how long the appliance has been on for
+    int totalDurationSeconds;
+    
+    // If the triggered flag can be cleared on
+    // from low power usage. 
+    // Some appliances (dish washer/washing machine) are on
+    // even when in a low power state so fall back to timeout.
+    bool clearOnPower;
+} ApplianceTrigger;
+
+// Structure used to store each sensor reading and
+// some additional information 
+typedef struct {
+    int powerWatts;
+    int lastPowerWatts;
+    int deltaPower;
+    long measuredAt;
+    // If this measurement has been published.
+    bool published = true;
+} SensorState;
+
+
+ApplianceTrigger applianceTriggers[MAX_APPLIANCES];
+
+SensorState sensorStates[MAX_SENSORS];
+
+int publishCount = 0;
+
+int statusLed = D7;
+
+// Buffer for publishing json data to Tinamous
+// Maxes out Particle.publish at 255 characters.
+String json;
+
+void setup()
+{
+    // USB
+    Serial.begin(57600);
+    // via TX/RX pins for current cost.
+    Serial1.begin(57600);      
+    
+    // Reserve space in the buffers.
+    buffer.reserve(100);
+    messageBuffer.reserve(512);
+    json.reserve(256);
+    
+    // LED indication of RX data
+    pinMode(statusLed, OUTPUT);
+    digitalWrite(statusLed, LOW);
+    
+    // RGB indication of publish.
+    RGB.control(true);
+    RGB.color(255, 255, 255);
+    
+    // Set-up the appliances
+    setupAppliances();
+   
+    Particle.publish("Current Cost Monitor V0.08");
+}
+
+void setupAppliances() {
+    ApplianceTrigger dishWasher = ApplianceTrigger();
+    dishWasher.name = "Dish washer";
+    dishWasher.sensorId = 1;
+    dishWasher.triggerLevelLower = 2000; 
+    // Approve 2.2kW usage.
+    dishWasher.triggerLevelUpper = 3000;
+    dishWasher.lastTriggeredAt = 0;
+    dishWasher.resetAfter = 0;
+    // 2.5 hour wash cycle.
+    dishWasher.reTriggerDelaySeconds = 2.75 * 60 * 60;
+    dishWasher.isTriggered = false;
+    dishWasher.triggerCount = 0;
+    dishWasher.clearOnPower =false;
+    
+    
+    // Washing machine
+    // Consumes about 2 Watts when on, but not running.
+    ApplianceTrigger washingMachine = ApplianceTrigger();
+    washingMachine.name = "Washing machine (running)";
+    washingMachine.sensorId = 5;
+    washingMachine.triggerLevelLower = 100; 
+    // Approve 2.2kW usage.
+    washingMachine.triggerLevelUpper = 3000;
+    washingMachine.lastTriggeredAt = 0;
+    washingMachine.resetAfter = 0;
+    // 2.5 hour wash cycle.
+    washingMachine.reTriggerDelaySeconds = 3 * 60 * 60;
+    washingMachine.isTriggered = false;
+    washingMachine.triggerCount = 0;
+    washingMachine.clearOnPower = false;
+    
+    // Kettle
+    // needs to reset on -ve trigger.
+    ApplianceTrigger kettle = ApplianceTrigger();
+    kettle.name = "Kettle";
+    kettle.sensorId = 0; // House sensor
+    kettle.triggerLevelLower = 2800; 
+    kettle.triggerLevelUpper = 3200;
+    kettle.lastTriggeredAt = 0;
+    kettle.resetAfter = 0;
+    // Max 5 minutes run time.
+    kettle.reTriggerDelaySeconds = 5 * 60;
+    kettle.isTriggered = false;
+    kettle.triggerCount = 0;
+    kettle.clearOnPower = true;
+    
+    // Shower
+    // needs to reset on -ve trigger.
+    ApplianceTrigger shower = ApplianceTrigger();
+    shower.name = "Shower";
+    shower.sensorId = 0; // House sensor
+    shower.triggerLevelLower = 7000; 
+    shower.triggerLevelUpper = 8000;
+    shower.lastTriggeredAt = 0;
+    shower.resetAfter = 0;
+    // allow upto 30 minutes for a shower before
+    // forcing a reset.
+    shower.reTriggerDelaySeconds = 30 * 60;
+    shower.isTriggered = false;
+    shower.triggerCount = 0;
+    shower.clearOnPower = true;
+    
+    // 
+    applianceTriggers[0] = dishWasher;
+    applianceTriggers[1] = washingMachine;
+    applianceTriggers[2] = kettle;
+    applianceTriggers[3] = shower;
+}
+
+void loop() {
+    
+    // move the messages from the serial receive
+    // to the main message buffer to be processed here.
+    messageBuffer+=buffer;
+    buffer = "";
+    
+    // Look for "</msg>" as the indication that the end of the message has been read.
+    // xml end terminator found.
+    int messageStartPosition = messageBuffer.indexOf("<msg>");
+    int messageTerminatorPosition = messageBuffer.indexOf("</msg>");
+    
+    if (messageStartPosition>=0 && messageTerminatorPosition>0) {
+        // This ignores the > at the end, that's left in the buffer
+        // to combines with future mesages.
+        messageTerminatorPosition = messageTerminatorPosition + 6;
+        
+        // Extract the message.
+        String message = messageBuffer.substring(messageStartPosition, messageTerminatorPosition);
+        
+        // Remove the string we are processing and anything we're ignoring before it.
+        messageBuffer.remove(0, messageTerminatorPosition);
+        
+        // ensure buffer contains the start terminator.
+        // Ensure that we have at-least <tmpr> start element
+        // don't care about anything before that though.
+        if (message.indexOf("tmpr") > -1) {
+            processPower(message);
+        } else if (message.indexOf("<hist>")) {
+            processHistory(message);
+        } else {
+            Serial.println("Unknown message: " + message);
+        }
+    }
+    
+    // Every n seconds publish the  value of the sensors.
+    // Tune this so not to publish to often but also
+    // not miss a sensor reading.
+    if (publishCount > 5000) {
+        RGB.color(00, 00, 255);
+        publishSensorsJson();
+        publishCount = 0;
+    }
+    
+    delay(10);
+    publishCount+=10;
+    RGB.color(0, 0, 0);
+}
+
+// <msg>
+// <src>CC128-v1.29</src>
+// <dsb>01579</dsb>
+// <time>19:25:29</time>
+// <tmpr>23.7</tmpr>
+// <sensor>2</sensor>
+// <id>02927</id>
+// <type>1</type>
+// <ch1>
+//  <watts>00506</watts>
+// </ch1>
+// </msg>
+void processPower(String message) {
+    Serial.println("Processing Power: " + message);
+            
+    RGB.color(00, 255, 00);
+    
+    temperature = extractTemperature(message);
+    
+    int sensorId = getSensor(message);
+    
+    // Sensor may have upto 3 Channes of data.
+    // but for now, just use channel 1.
+    int powerNow = extractChannelData(message, 1);
+    
+    // -1 indicates channel data not found.
+    if (powerNow >= 0) {
+        updateSensorState(sensorId, powerNow);
+        checkAppliances(sensorId);
+    }
+}
+
+// message will contain a history xml message.
+// <msg>
+// <src>CC128-v1.29</src>
+// <dsb>01579</dsb> 
+// <time>19:01:50</time>
+// <hist>
+//  <dsw>01581</dsw>
+//	<type>1</type>
+//	<units>kwhr</units>
+//	<data>
+//		<sensor>0</sensor>
+//		<h706>2.626</h706>
+//		<h704>2.708</h704>
+//		<h702>2.748</h702>
+//		<h700>2.291</h700>
+//	</data>
+// ... to sensor 9
+// </hist>
+// </msg>
+// Also...
+// <h338>3.492</h338>
+// <h336>2.892</h336>
+// <h334>5.446</h334>
+// <h332>2.558</h332>
+void processHistory(String message) {
+    Serial.println("History: " + message);
+}
+
+void updateSensorState(int sensorId, int powerNow) {
+    SensorState sensorState = sensorStates[sensorId];
+    
+    if (!sensorState.published) {
+        Serial.println("Missed sensor reading. Previous reading not published");
+    }
+    
+    sensorState.deltaPower = powerNow - sensorState.powerWatts;
+    sensorState.lastPowerWatts = sensorState.powerWatts;
+    sensorState.powerWatts= powerNow;
+    sensorState.published = false;
+    sensorStates[sensorId] = sensorState;
+}
+
+// TODO: Ignore delta's on reset.
+void checkAppliances(int sensorId) {
+    int now = Time.now();
+    
+    for (int i = 0; i < MAX_APPLIANCES; i++) {
+        ApplianceTrigger applianceTrigger = applianceTriggers[i];
+        
+        // Figure out if the appliance trigger should be reset based 
+        // on time.
+        if (applianceTrigger.isTriggered && now > applianceTrigger.resetAfter) {
+            applianceReset(i);
+        }
+        
+        // If the appliance is for this sensor and is not already triggered.
+        if (applianceTrigger.sensorId == sensorId) {
+            SensorState sensorState = sensorStates[sensorId];
+            
+            if (!applianceTrigger.isTriggered) {
+                // If the recorderd change in power level (delta) is between the lower and upper
+                // trigger levels for the appliance then trigger the appliance
+                // as being on.
+                if (sensorState.deltaPower > applianceTrigger.triggerLevelLower && sensorState.deltaPower < applianceTrigger.triggerLevelUpper) {
+                    applianceTriggered(i, sensorState.deltaPower);
+                }
+            } else if (applianceTrigger.clearOnPower) {
+                // If the appliance triggered can be reset from 
+                // the power no longer being drawn.
+                // Is triggered. Check to see if deltaPower is -ve and if within range
+                // of the appliance. If so, reset the appliance.
+                 if (sensorState.deltaPower < (-applianceTrigger.triggerLevelLower) && sensorState.deltaPower > (-applianceTrigger.triggerLevelUpper)) {
+                    applianceReset(i);
+                }
+            }
+        }
+    }
+}
+
+void applianceTriggered(int applianceId, int powerLevel) {
+    int now = Time.now();
+    applianceTriggers[applianceId].isTriggered = true;
+    applianceTriggers[applianceId].lastTriggeredAt = now;
+    applianceTriggers[applianceId].triggerCount++;
+    applianceTriggers[applianceId].resetAfter = now + applianceTriggers[applianceId].reTriggerDelaySeconds;
+    
+    Particle.publish("status", applianceTriggers[applianceId].name + " triggered. Power: " + String(powerLevel));
+    Serial.println(applianceTriggers[applianceId].name + " triggered");
+}
+
+void applianceReset(int applianceId) {
+    if (applianceTriggers[applianceId].isTriggered) {
+        int durationSeconds =Time.now() - applianceTriggers[applianceId].lastTriggeredAt;
+        String name = applianceTriggers[applianceId].name;
+        
+        applianceTriggers[applianceId].isTriggered = false;
+        applianceTriggers[applianceId].durationSeconds =  durationSeconds;
+        applianceTriggers[applianceId].totalDurationSeconds += durationSeconds;
+        Particle.publish("status", name + " cleared. Was on for " + String(durationSeconds) + "s");
+        Serial.println(name + " cleared. Was on for " + String(durationSeconds) + "s");
+        // TODO: Publish json status as well.
+    
+        
+        String json = "{'" + name + "-duration':" + String(durationSeconds);
+        json.concat(", '" + name + "-totalDuration':"+ String(applianceTriggers[applianceId].totalDurationSeconds));
+        json.concat(", '" + name + "-times':"+ String(applianceTriggers[applianceId].triggerCount));
+        json.concat("}");
+        Serial.println("Json: " + json);
+        Particle.publish("json", json);
+    }
+}
+
+// Extract the temperature value from the xml
+String extractTemperature(String message) {
+    return extractXmlElement(message, "tmpr");
+}
+
+// Get the id of the sensor being reported.
+int getSensor(String message) {
+    //int start = message.indexOf("sensor") + 7;
+    //int endString = message.indexOf("/sensor") - 1;
+    String sensor = extractXmlElement(message, "sensor");
+    
+    // Sensor may be 0. or, if sensor text not valid string
+    // will also return 0.
+    int sensorId = sensor.toInt();
+    
+    return sensorId;
+}
+
+// Get the channel data for the sensor.
+// most will have a single channel but the base (sensor 0)
+// may have more channels if more than one clamp is fitted.
+// <ch1><watts>00506</watts></ch1>
+int extractChannelData(String message, int channel) {
+    String channelName = "ch" + (String)channel;
+    String channelData = extractXmlElement(message, channelName);
+    
+    //int start = message.indexOf(channelName) + 11;
+    if (channelData != "") {
+        //int endString = message.indexOf("/" + channelName) - 9;
+        //String channelPower = message.substring(start, endString);
+        String channelPower = extractXmlElement(channelData, "watts");
+        
+        // Each sensor has n (upto 3) channels. Ignore channels for now as 
+        // typical usage is ch1.
+        return channelPower.toInt();
+    } 
+    
+    // Indicate error with -1 watts for the channel.
+    Serial.println("No data found for sensor: ");
+    return -1;
+}
+
+// Extract the value between two xml
+// element tags
+// e.g. <sensor>7</sensor>
+// use tag  "sensor"
+// returns "7"
+String extractXmlElement(String xml, String tag) {
+    int startPosition = xml.indexOf("<" + tag + ">") + tag.length() + 2;
+    int endPosition = xml.indexOf("</" + tag + ">");
+    
+    if (endPosition > startPosition) {
+        return xml.substring(startPosition, endPosition);
+    }
+    Serial.println("End < start");
+    return "";
+}
+
+// Publish the sensor values (power)
+void publishSensorsJson() {
+    // Build up the senml.
+    bool hasData = false;
+    json = "{'t': '" + temperature + "' ";
+    
+    for (int sensorId = 0; sensorId < MAX_SENSORS; sensorId ++) {
+        SensorState sensorState = sensorStates[sensorId];
+        
+        // Only publish the sensor valur if it has a new value since last publish.
+        if (!sensorState.published) {
+            hasData = true;
+            
+            json.concat(",'S" + String(sensorId) + "':'" + String(sensorState.powerWatts) + "' ");
+            
+            //senml+= ",{'n':'S" + String(sensorId) + "', 'v':'" + String(sensorState.powerWatts) + "'}";
+            
+            // Include the delta if it's outside a noise range
+            //if (sensorState.deltaPower > 2 || sensorState.deltaPower < -2) {
+                //senml+= ",{'n':'D" + String(sensorId) + "', 'v':'" + String(sensorState.deltaPower) + "'}";
+                json.concat(",'D" + String(sensorId) + "':'" + String(sensorState.deltaPower) + "' ");
+            //}
+            
+            sensorStates[sensorId].published = true;
+        }
+    }
+    json.concat("}");
+    
+    // Only publish if we have new (unpublished) measurements
+    if (hasData) {
+        Serial.println("json: " + json);
+        Particle.publish("json", json);
+    }
+}
+
+// Watch for serial data on the Tx/Rx serial pins.
+void serialEvent1()
+{
+    digitalWrite(statusLed, HIGH);
+    
+    while (Serial1.available())
+    {
+        char c = Serial1.read();
+        
+        // read form TC/RX serial 
+        buffer+=c;
+    }
+    
+    digitalWrite(statusLed, LOW);
 }
 				</code>
 				</pre>
@@ -261,9 +756,11 @@
 			<div class="col-lg-12">
                 <h2 class="page-header">Ordering Options</h2>
 				<p>
+					<!--
 					<a href="https://www.tindie.com/products/ThingySticks/environment-sensor-for-the-photon-or-electron/" class="btn btn-success btn-lg">Buy on Tindie.</a>
 
 					<a href="https://oshpark.com/shared_projects/0NK63Pt3"><img src="https://oshpark.com/assets/badge-5b7ec47045b78aef6eb9d83b3bac6b1920de805e9a0c227658eac6e19a045b9c.png" alt="Order from OSH Park"></img></a>
+					-->
 				</p>	
 			</div>
 		</div>
@@ -282,7 +779,7 @@
 					<p>
 					<a href="https://www.facebook.com/ThingySticks">Facebook.com/ThingySticks</a>, 
 					<a href="https://twitter.com/ThingySticks">@ThingySticks</a>,
-					Copyright &copy; Analysis UK Ltd 2016 - 2017
+					Copyright &copy; Analysis UK Ltd 2016 - 2018
 					</p>
 					<p>ThingySticks and Thing On A Stick are Registered Trade Marks of Analysis UK Ltd.</p>
                 </div>
